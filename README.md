@@ -1,94 +1,101 @@
 # Synt-E: The Protocol for Talking to AIs 🚀
 
-Synt-E is a "language" designed to give instructions to Artificial Intelligences (LLMs) as efficiently as possible. Instead of writing long sentences, you use short, dense commands that the AI understands better, faster, and at a lower cost.
+Synt-E is a protocol and a command-line tool for translating natural language into efficient machine commands, designed for interaction with local LLMs (via Ollama). Instead of writing long sentences, you use a keyboard shortcut to compile requests on the fly into a dense format that the AI understands better, faster, and at a lower cost.
+
+This project is not just an experiment, but a **Power Tool** for developers and power users who want to optimize their AI workflow, and a prototype of a **Machine-to-Machine (M2M) communication protocol**.
 
 ---
 
 ## 🤔 Why Does Synt-E Exist? The Problem
 
-When we talk to an AI like ChatGPT, we use human language, which is full of words that are useless to a machine.
+When we talk to an AI, we use colloquial language. This is fine for a chat, but in a professional workflow or an automated system, it is:
+- **Slow:** The AI has to process unnecessary words.
+- **Expensive:** More words = more tokens to compute (or pay for).
+- **Ambiguous:** Human language can be misunderstood.
 
 **BEFORE (Natural Language):**
-> "Hi, could you please write me a Python script to analyze data from a CSV file?"
-*(Too many words, too many "tokens", risk of ambiguity)*
+> "Hi, could you write me a Python script to analyze data from a CSV file?"
 
-**AFTER (Synt-E):**
+**AFTER (Synt-E, activated with a shortcut):**
 > `task:code lang:python action:analyze_data format:csv`
-*(Few words, zero ambiguity, maximum efficiency)*
 
 ---
 
-## ✨ How Does the Magic Work? The Logic Behind Synt-E
+## 🛠️ Why is it Useful in Any Software Project?
 
-The secret is simple: **modern AIs have been trained on almost the entire Internet, and most of the Internet is in English.**
+In any development environment that integrates LLMs—whether it's a startup, a DevOps team, or an open-source project—efficiency is key. Synt-E offers concrete advantages:
 
-They have seen **billions of patterns** of code, terminal commands, configuration files, and technical texts in English. For them, technical English is not a language; it is their **native language**.
+1.  **💰 Cost Reduction (Token Saving):** A Synt-E prompt can be **up to 70% shorter** than a normal sentence, resulting in direct savings on costs and computational resources.
+2.  **⚡ Increased Speed (Latency Reduction):** Fewer tokens to process means faster responses, which is essential for real-time applications.
+3.  **🤖 Reliability and Testability (Fewer Bugs):** Synt-E is a standardized protocol. It makes interactions with AIs **predictable and easy to test**, reducing bugs.
 
-- **Technical English is a highway:** Giving a command in Synt-E is like getting on the highway. The request reaches its destination quickly and smoothly.
-- **Other languages are country roads:** The AI understands them, but it has to "translate" and "interpret" more, wasting time and resources.
+### The Fundamental Discovery: The Right Model is Everything
+During testing, we discovered that super-trained "assistant" models (like `Llama 3 Instruct`) are the **worst** for this task because their instinct to "execute" the command wins over the meta-instruction to "compile".
 
-### The Concrete Advantages
-1.  **💰 Token Savings (and Money):** Fewer words mean fewer "tokens" to pay for if you use a paid service. Locally, it means less load on your CPU/GPU.
-2.  **⚡ Superior Speed:** The AI doesn't have to think about how to interpret your pleasantries. It gets straight to the point, giving you an answer faster.
-3.  **✅ Better Answers:** By eliminating ambiguity, you reduce the risk of the AI misunderstanding and giving you a wrong or incomplete answer.
+The best models are those that are more "raw" or "unfiltered," which are more obedient to a strict `SYSTEM_PROMPT`. Our winner was **`gpt-oss:20b`**.
+
+### System Limits: When NOT to use Synt-E
+Synt-E is a protocol for **compressing complexity**, not always length.
+- **Great for:** Long, descriptive, and complex sentences. Here, the savings are enormous.
+- **Useless for:** Very short sentences (1-3 words). In this case, the AI has to "invent" the context (`task:`, `topic:`), and the output may be longer than the input.
 
 ---
 
-## 💻 Try It Now on Your PC! (with Ollama)
+## 💻 Usage Guide: Your Personal Compiler
 
-This project includes a simple Python program that transforms your sentences in Italian (or any other language) into the Synt-E protocol, using an AI that runs **free and offline** on your computer.
+This tool runs in the background, listening for a series of keyboard shortcuts to give you complete and safe control over the synthesis process.
 
-### Step 1: Prerequisites
-1.  **Python:** Make sure you have it installed. If you don't, download it from [python.org](https://python.org).
-2.  **Ollama:** Install Ollama to run AIs locally. Download it from [ollama.com](https://ollama.com).
-
-### Step 2: Choose the Right Model (IMPORTANT)
-Not all AI models are suitable for this task.
-- **"Assistant" Models (like Llama 3.1 Instruct):** They are too "helpful." If you ask them to translate a request to write code, they will write the code instead of translating it. **They are the least suitable.**
-- **"Raw" or "Unfiltered" Models (like GPT-OSS or Dolphin):** They are more flexible and obedient. They understand their role as a "compiler" and do not try to perform the task for you. **They are the best for this script.**
-
-From your list, the winner was **`gpt-oss:20b`**.
-
-### Step 3: Install and Run
-1.  **Download the model:** Open the terminal and run this command.
+### Installation
+1.  **Install Ollama:** Download it from [ollama.com](https://ollama.com) and run it.
+2.  **Download a Model:** Open the terminal and download the model you want to use (e.g., `gpt-oss` or `qwen3:30b`).
     ```bash
     ollama pull gpt-oss:20b
     ```
-
-2.  **Install the library:** In the project folder, run this command.
+3.  **Install Python Libraries:**
     ```bash
-    pip install ollama
+    pip install ollama keyboard pyperclip pywin32 psutil winsound
     ```
 
-3.  **Run the script:** Make sure Ollama is running, then run the program.
-    ```bash
-    python synt_e.py
-    ```
+### Startup and Command-Line Options
+Start the script from the terminal. You can use different "flags" to customize its behavior.
 
-### Usage Examples
-Now you can write your requests. The program will send them to your local model and return the translation in Synt-E.
+**Basic Startup:**
+```bash
+python synt_e.py
+(Uses default shortcuts and model)
+```
+**Startup with a Custom Model:**
+```bash
+python synt_e.py --model="qwen3:30b-a3b-unlocked"
+```
+**Startup with a Custom Shortcut:**
+```bash
+python synt_e.py --hotkey="ctrl+shift+x"
+```
 
-**Example 1: Technical Request**
-> **YOU >** Write a Python script that uses Keras for sentiment analysis.
->
-> **AI >** `task:write_script language:python libraries:keras model:RNN dataset:movie_reviews task:sentiment_analysis`
+**Startup in "Append" Mode (does not replace, but adds at the end):**
+```bash
+python synt_e.py --append
+```
+You can combine as many options as you like!
 
-**Example 2: Creative Request**
-> **YOU >** Generate an image of a red dragon, in watercolor style.
->
-> **AI >** `task:generate_image subject:red_dragon style:watercolor`
+### Daily Workflow (Safe Method)
+The workflow has been designed to be 100% reliable, giving you full control.
+1.  Start the script in a terminal and leave it open in the background.
+2.  Go to any program (Chrome, VS Code, Notepad...).
+3.  Select the text you want to synthesize.
+4.  **Copy Manually:** Press `Ctrl+C`.
+5.  **Activate Synthesis:** Press the shortcut (default: `Ctrl+Alt+S`).
+Your text will be instantly replaced with the Synt-E version!
 
-**Example 3: Complex Request**
-> **YOU >** Prepare a PowerPoint presentation for the quarterly meeting with the CEO on the topic of sales.
->
-> **AI >** `task:create_presentation format:powerpoint event:quarterly_meeting audience:ceo topic:sales`
+### All Shortcuts (Power User Features)
+This tool is more than just a synthesizer. It's a command suite:
+-   **Synthesize (`Ctrl+Alt+S`):** Compiles the text you have copied.
+-   **Undo (`Ctrl+Alt+U`):** You have 10 seconds after a synthesis to press this hotkey and restore the original text. A lifesaver!
+-   **Interrupt AI (`Ctrl+Alt+C`):** If the AI is taking too long for a complex request, press this shortcut to cancel the operation.
+-   **Keyboard Emergency (`Ctrl+Alt+Q`):** In the very rare case that the script locks your keyboard, this is your forced "emergency exit" that resets everything.
 
----
-
-## 🏗️ The Future of the Project
-This script is just a prototype. The complete architecture of Synt-E (which we have explored) includes:
-- A **hybrid engine** that uses fast rules for simple commands.
-- A **security** system to block sensitive data.
-- An **ecosystem** with extensions for editors like VS Code.
-
-Have fun compiling your thoughts!
+### Audio Feedback
+-   **Double Beep:** Confirms that an operation (synthesis, undo) was successful.
+-   **Single Low Beep:** Alerts you to an error (e.g., no text in the clipboard).
+-   **Cancellation Beep:** Confirms that the AI operation has been interrupted.

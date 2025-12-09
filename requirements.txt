@@ -1,1 +1,6 @@
 ollama
+keyboard
+pyperclip
+pywin32
+psutil
+winsound
