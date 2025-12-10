@@ -95,7 +95,7 @@ This tool is more than just a synthesizer. It's a command suite:
 -   **Interrupt AI (`Ctrl+Alt+C`):** If the AI is taking too long for a complex request, press this shortcut to cancel the operation.
 -   **Keyboard Emergency (`Ctrl+Alt+Q`):** In the very rare case that the script locks your keyboard, this is your forced "emergency exit" that resets everything.
 
-![Screenshot of the app showing emergency shortcut]("Screenshot 2025-12-10 171345.png")
+   <img width="807" height="800" alt="Screenshot_2025-12-10_171345" src="https://github.com/user-attachments/assets/3aad4500-a7a3-4924-bd6a-12c0cfab7ea9" />
 
 ### Audio Feedback
 -   **Double Beep:** Confirms that an operation (synthesis, undo) was successful.
