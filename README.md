@@ -1,8 +1,8 @@
 # Synt-E: The Protocol for Talking to AIs 🚀
 
-Synt-E is a protocol and a command-line tool for translating natural language into efficient machine commands, designed for interaction with local LLMs (via Ollama). Instead of writing long sentences, you use a keyboard shortcut to compile requests on the fly into a dense format that the AI understands better, faster, and at a lower cost.
+Synt-E is a protocol and a command-line tool for translating natural language into efficient machine commands, designed for interaction with local LLMs (via Ollama). Instead of writing long sentenc[...] 
 
-This project is not just an experiment, but a **Power Tool** for developers and power users who want to optimize their AI workflow, and a prototype of a **Machine-to-Machine (M2M) communication protocol**.
+This project is not just an experiment, but a **Power Tool** for developers and power users who want to optimize their AI workflow, and a prototype of a **Machine-to-Machine (M2M) communication pro[...] 
 
 ---
 
@@ -30,7 +30,7 @@ In any development environment that integrates LLMs—whether it's a startup, a 
 3.  **🤖 Reliability and Testability (Fewer Bugs):** Synt-E is a standardized protocol. It makes interactions with AIs **predictable and easy to test**, reducing bugs.
 
 ### The Fundamental Discovery: The Right Model is Everything
-During testing, we discovered that super-trained "assistant" models (like `Llama 3 Instruct`) are the **worst** for this task because their instinct to "execute" the command wins over the meta-instruction to "compile".
+During testing, we discovered that super-trained "assistant" models (like `Llama 3 Instruct`) are the **worst** for this task because their instinct to "execute" the command wins over the meta-ins[...]
 
 The best models are those that are more "raw" or "unfiltered," which are more obedient to a strict `SYSTEM_PROMPT`. Our winner was **`gpt-oss:20b`**.
 
@@ -94,6 +94,8 @@ This tool is more than just a synthesizer. It's a command suite:
 -   **Undo (`Ctrl+Alt+U`):** You have 10 seconds after a synthesis to press this hotkey and restore the original text. A lifesaver!
 -   **Interrupt AI (`Ctrl+Alt+C`):** If the AI is taking too long for a complex request, press this shortcut to cancel the operation.
 -   **Keyboard Emergency (`Ctrl+Alt+Q`):** In the very rare case that the script locks your keyboard, this is your forced "emergency exit" that resets everything.
+
+![Screenshot of the app showing emergency shortcut]("Screenshot 2025-12-10 171345.png")
 
 ### Audio Feedback
 -   **Double Beep:** Confirms that an operation (synthesis, undo) was successful.
