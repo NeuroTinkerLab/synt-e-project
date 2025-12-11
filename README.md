@@ -30,7 +30,7 @@ In any development environment that integrates LLMs—whether it's a startup, a 
 3.  **🤖 Reliability and Testability (Fewer Bugs):** Synt-E is a standardized protocol. It makes interactions with AIs **predictable and easy to test**, reducing bugs.
 
 ### The Fundamental Discovery: The Right Model is Everything
-During testing, we discovered that super-trained "assistant" models (like `Llama 3 Instruct`) are the **worst** for this task because their instinct to "execute" the command wins over the meta-ins[...]
+During testing, we discovered that super-trained "assistant" models (like `Llama 3 Instruct`) are the **worst** for this task because their instinct to "execute" the command wins over the meta-instruction to "compile".
 
 The best models are those that are more "raw" or "unfiltered," which are more obedient to a strict `SYSTEM_PROMPT`. Our winner was **`gpt-oss:20b`**.
 
@@ -60,9 +60,9 @@ This tool runs in the background, listening for a series of keyboard shortcuts t
 Start the script from the terminal. You can use different "flags" to customize its behavior.
 
 **Basic Startup:**
+Uses default shortcuts and model
 ```bash
 python synt_e.py
-(Uses default shortcuts and model)
 ```
 **Startup with a Custom Model:**
 ```bash
