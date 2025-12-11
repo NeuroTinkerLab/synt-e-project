@@ -1,8 +1,8 @@
 # Synt-E: The Protocol for Talking to AIs 🚀
 
-Synt-E is a protocol and a command-line tool for translating natural language into efficient machine commands, designed for interaction with local LLMs (via Ollama). Instead of writing long sentenc[...] 
+Synt-E is a protocol and a command-line tool for translating natural language into efficient machine commands, designed for interaction with local LLMs (via Ollama). Instead of writing long sentences, you use a keyboard shortcut to compile requests on the fly into a dense format that the AI understands better, faster, and at a lower cost.
 
-This project is not just an experiment, but a **Power Tool** for developers and power users who want to optimize their AI workflow, and a prototype of a **Machine-to-Machine (M2M) communication pro[...] 
+This project is not just an experiment, but a **Power Tool** for developers and power users who want to optimize their AI workflow, and a prototype of a **Machine-to-Machine (M2M) communication protocol**.
 
 ---
 
